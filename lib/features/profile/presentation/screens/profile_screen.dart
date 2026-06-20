@@ -87,7 +87,7 @@ class ProfileScreen extends ConsumerWidget {
                       style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.darkTertiary),
                     ),
                     loading: () => const SizedBox.shrink(),
-                    error: (_, __) => const SizedBox.shrink(),
+                    error: (_, _) => const SizedBox.shrink(),
                   ),
                 ],
               ),
