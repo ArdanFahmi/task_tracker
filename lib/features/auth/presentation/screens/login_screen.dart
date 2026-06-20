@@ -119,7 +119,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               controller: _emailController,
               focusNode: _emailFocusNode,
               keyboardType: TextInputType.emailAddress,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(16),
                 hintText: 'Email',
@@ -162,7 +162,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               controller: _passwordController,
               focusNode: _passwordFocusNode,
               obscureText: _obscurePassword,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(16),
                 hintText: 'Password',
@@ -212,7 +212,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               },
               title: "Login",
               btnColor: AppColors.primaryColor,
-              colorTitle: Colors.white,
+              colorTitle: AppColors.secondaryColor,
               paddingVerticalContent: 16,
               fontSize: 16,
               isLoading: authState.isLoading,
