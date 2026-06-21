@@ -46,6 +46,39 @@ Ringkas alasan memilih Riverpod untuk project ini:
 - Skalabel untuk aplikasi besar: provider-family, autoDispose, dan kombinasi provider memudahkan manajemen state feature-wise.
 - Performa baik: pembaruan terbatas pada listener yang relevan.
 
+## Backend: Supabase (PostgreSQL)
+
+Project ini menggunakan Supabase (PostgreSQL) sebagai backend. Alasan dan keuntungan utama:
+- Database SQL lengkap (PostgreSQL) untuk query kompleks dan relasi data.
+- Managed service: tidak perlu mengelola server database sendiri.
+- Fitur realtime: subscriptions dan realtime updates berguna untuk sinkronisasi task secara langsung.
+- Autentikasi bawaan (email/password, OAuth) yang mudah dipadukan dengan aplikasi Flutter.
+- Dukungan SDK Dart/Flutter (`supabase_flutter`) mempermudah integrasi.
+- Keamanan: dukungan Row-Level Security (RLS) dan policy untuk kontrol akses.
+- Cepat untuk prototyping namun cukup kuat untuk skala produksi.
+
+Catatan konfigurasi singkat:
+- Simpan SUPABASE_URL dan SUPABASE_ANON_KEY di environment variables.
+- Contoh inisialisasi di Flutter: `Supabase.initialize(url: ..., anonKey: ...)` (lihat dokumentasi `supabase_flutter`).
+
+## Table Schema
+```
+create table public.tasks (
+  id uuid not null default gen_random_uuid (),
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone not null default now(),
+  user_id uuid not null default auth.uid (),
+  title character varying not null,
+  description character varying null,
+  start_date timestamp with time zone not null,
+  end_date timestamp with time zone not null,
+  status public.task status not null,
+  is_deleted boolean not null default false,
+  constraint task_pkey primary key (id),
+  constraint task_user_id_fkey foreign KEY (user_id) references auth.users (id)
+) TABLESPACE pg_default;
+```
+
 ## Screenshot
 
 <p align="center">
