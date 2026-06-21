@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:task_tracker/core/constants/app_colors.dart';
+import 'package:task_tracker/core/widgets/menu_item_tile.dart';
 import 'package:task_tracker/features/auth/presentation/screens/login_screen.dart';
-import 'package:task_tracker/features/profile/presentation/widgets/item_menu_profile.dart';
 import '../../../../core/providers/app_info_provider.dart';
 import '../../../auth/providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
@@ -51,18 +51,16 @@ class ProfileScreen extends ConsumerWidget {
               ),
               child: Column(
                 children: [
-                  ItemMenuProfile(
+                  MenuItemTile(
                     leadingIcon: const Icon(SolarIconsOutline.settingsMinimalistic, color: AppColors.darkTertiary),
                     title: "Manage Account",
-                    onTap: () {
-                      // TODO: navigate ke edit profile screen
-                    },
+                    onTap: () {},
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 8),
                     child: Divider(color: AppColors.borderDarkSecondary, thickness: 1),
                   ),
-                  ItemMenuProfile(
+                  MenuItemTile(
                     leadingIcon: const Icon(Icons.logout, color: AppColors.error500),
                     title: "Logout",
                     textColor: AppColors.error500,

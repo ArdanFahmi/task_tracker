@@ -6,6 +6,7 @@ import 'package:task_tracker/core/widgets/custom_appbar.dart';
 import 'package:task_tracker/core/widgets/error_view.dart';
 import 'package:task_tracker/core/widgets/info_empty_data.dart';
 import 'package:task_tracker/features/profile/providers/user_provider.dart';
+import 'package:task_tracker/features/task/presentation/screens/detail_task_screen.dart';
 import 'package:task_tracker/features/task/presentation/widgets/task_card.dart';
 import 'package:task_tracker/features/task/presentation/widgets/task_filter_bar.dart';
 import 'package:task_tracker/features/task/providers/filtered_task_list_provider.dart';
@@ -64,7 +65,15 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
         }
         return ListView.separated(
           itemCount: tasks.length,
-          itemBuilder: (context, index) => TaskCard(task: tasks[index]),
+          itemBuilder: (context, index) => TaskCard(
+            task: tasks[index],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DetailTaskScreen(taskId: tasks[index].id)),
+              );
+            },
+          ),
           separatorBuilder: (context, index) => const SizedBox(height: 16),
         );
       },

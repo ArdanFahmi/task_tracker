@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:task_tracker/core/constants/app_colors.dart';
 
-class ItemMenuProfile extends StatelessWidget {
+class MenuItemTile extends StatelessWidget {
   final Widget leadingIcon;
   final String title;
   final VoidCallback onTap;
   final Color? textColor;
-  const ItemMenuProfile({
+
+  const MenuItemTile({
     super.key,
     required this.leadingIcon,
     required this.title,
