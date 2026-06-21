@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:task_tracker/core/constants/app_colors.dart';
 import 'package:task_tracker/core/error/failure.dart';
+import 'package:task_tracker/core/utils/input_decoration_helper.dart';
 import 'package:task_tracker/core/widgets/custom_appbar.dart';
 import 'package:task_tracker/core/widgets/custom_button.dart';
 import 'package:task_tracker/core/widgets/custom_snackbar.dart';
@@ -114,28 +115,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             controller: _nameController,
             focusNode: _nameFocusNode,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(16),
-              hintText: 'Full Name',
-              hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.darkTertiary),
+            decoration: buildInputDecoration(hintText: 'Full Name').copyWith(
               prefixIcon: Padding(padding: const EdgeInsets.only(left: 10.0), child: Icon(SolarIconsOutline.user)),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.borderPrimary),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.error500),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-              ),
-              errorStyle: const TextStyle(color: AppColors.error500, fontSize: 12),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -155,28 +136,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             focusNode: _emailFocusNode,
             keyboardType: TextInputType.emailAddress,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(16),
-              hintText: 'Email',
-              hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.darkTertiary),
+            decoration: buildInputDecoration(hintText: 'Email').copyWith(
               prefixIcon: Padding(padding: const EdgeInsets.only(left: 10.0), child: Icon(SolarIconsOutline.letter)),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.borderPrimary),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.error500),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-              ),
-              errorStyle: const TextStyle(color: AppColors.error500, fontSize: 12),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -199,10 +160,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             focusNode: _passwordFocusNode,
             obscureText: _obscurePassword,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(16),
-              hintText: 'Password min 6 characters',
-              hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.darkTertiary),
+            decoration: buildInputDecoration(hintText: 'Password').copyWith(
               prefixIcon: Padding(padding: const EdgeInsets.only(left: 10.0), child: Icon(SolarIconsOutline.lock)),
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(right: 10.0),
@@ -212,23 +170,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                 ),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.borderPrimary),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.error500),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-              ),
-              errorStyle: const TextStyle(color: AppColors.error500, fontSize: 12),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -251,10 +192,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             focusNode: _confirmPasswordFocusNode,
             obscureText: _obscureConfirmPassword,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(16),
-              hintText: 'Repeat password',
-              hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.darkTertiary),
+            decoration: buildInputDecoration(hintText: 'Confirm Password').copyWith(
               prefixIcon: Padding(padding: const EdgeInsets.only(left: 10.0), child: Icon(SolarIconsOutline.lock)),
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(right: 10.0),
@@ -264,23 +202,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   onPressed: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
                 ),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.borderPrimary),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.error500),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-                borderSide: const BorderSide(color: AppColors.primaryColor),
-              ),
-              errorStyle: const TextStyle(color: AppColors.error500, fontSize: 12),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {

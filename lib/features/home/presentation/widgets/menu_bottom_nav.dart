@@ -34,7 +34,7 @@ Widget buildListMenuBottomNavigation(BuildContext ctx, int selectedIndex, void F
     items: menuItems,
     type: BottomNavigationBarType.fixed,
     currentIndex: selectedIndex,
-    backgroundColor: AppColors.secondaryColor,
+    backgroundColor: AppColors.surfaceColor,
     showUnselectedLabels: true,
     selectedItemColor: AppColors.primaryColor,
     onTap: onItemTapped,

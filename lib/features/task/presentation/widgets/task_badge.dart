@@ -10,7 +10,7 @@ class StatusBadge extends StatelessWidget {
   Color get _bgColor {
     switch (status) {
       case TaskStatus.todo:
-        return AppColors.borderPrimary;
+        return AppColors.borderDarkSecondary;
       case TaskStatus.progress:
         return AppColors.primary200;
       case TaskStatus.done:
@@ -25,7 +25,7 @@ class StatusBadge extends StatelessWidget {
       case TaskStatus.progress:
         return AppColors.primaryColor;
       case TaskStatus.done:
-        return AppColors.success500;
+        return AppColors.secondaryColor;
     }
   }
 
@@ -42,7 +42,7 @@ class StatusBadge extends StatelessWidget {
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: _textColor),
           ),
           const SizedBox(width: 4),
-          Icon(SolarIconsBold.altArrowDown, color: _textColor),
+          Icon(SolarIconsBold.altArrowDown, size: 18, color: _textColor),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:task_tracker/core/constants/app_colors.dart';
 import 'package:task_tracker/core/error/failure.dart';
+import 'package:task_tracker/core/utils/input_decoration_helper.dart';
 import 'package:task_tracker/core/widgets/custom_button.dart';
 import 'package:task_tracker/core/widgets/custom_snackbar.dart';
 import 'package:task_tracker/features/auth/presentation/screens/register_screen.dart';
@@ -120,28 +121,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               focusNode: _emailFocusNode,
               keyboardType: TextInputType.emailAddress,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(16),
-                hintText: 'Email',
-                hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.darkTertiary),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.borderPrimary),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: AppColors.error500),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
-                ),
-                errorStyle: const TextStyle(color: AppColors.error500, fontSize: 12),
-              ),
+              decoration: buildInputDecoration(hintText: "Email"),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
@@ -163,10 +143,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               focusNode: _passwordFocusNode,
               obscureText: _obscurePassword,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.neutralColor),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(16),
-                hintText: 'Password',
-                hintStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.darkTertiary),
+              decoration: buildInputDecoration(hintText: "Password").copyWith(
                 suffixIcon: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
                   child: IconButton(
@@ -175,23 +152,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                   ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: AppColors.borderPrimary),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: AppColors.error500),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: AppColors.primaryColor),
-                ),
-                errorStyle: const TextStyle(color: AppColors.error500, fontSize: 12),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {

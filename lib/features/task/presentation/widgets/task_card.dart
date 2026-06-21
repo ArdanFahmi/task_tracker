@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:task_tracker/core/constants/app_colors.dart';
 import 'package:task_tracker/features/task/data/models/task.dart';
+import 'package:task_tracker/features/task/presentation/screens/form_task_screen.dart';
 import 'package:task_tracker/features/task/presentation/widgets/task_badge.dart';
+import 'package:task_tracker/features/task/providers/task_notifier.dart';
 import 'package:task_tracker/shared/enums/task_status.dart';
 
 class TaskCard extends StatelessWidget {
@@ -12,6 +14,8 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isOverdue = _isOverdue(task.endDate, task.status);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -31,7 +35,10 @@ class TaskCard extends StatelessWidget {
                 icon: const Icon(SolarIconsBold.menuDots, color: AppColors.darkTertiary),
                 onSelected: (value) {
                   if (value == 'edit') {
-                    // TODO: navigate ke edit task screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FormTaskScreen(existingTask: task)),
+                    );
                   } else if (value == 'delete') {
                     // TODO: call delete (soft delete is_deleted = true)
                   }
@@ -43,23 +50,46 @@ class TaskCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
           Text(
-            "Title",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.neutralColor),
+            task.title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.neutralColor),
           ),
           Text(
-            "Description",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.neutralColor),
+            task.description ?? '-',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.neutralColor),
           ),
           const SizedBox(height: 16),
-          Text(
-            _formatDate(task.startDate),
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.neutralColor),
+          Row(
+            children: [
+              if (isOverdue)
+                const Padding(
+                  padding: EdgeInsets.only(right: 4),
+                  child: Icon(SolarIconsBold.danger, size: 16, color: AppColors.error500),
+                ),
+              Text(
+                _formatDate(task.endDate),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: isOverdue ? AppColors.error500 : AppColors.neutralColor,
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
+  }
+
+  bool _isOverdue(DateTime endDate, TaskStatus status) {
+    if (status == TaskStatus.done) return false;
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final end = DateTime(endDate.year, endDate.month, endDate.day);
+    return end.isBefore(today);
   }
 
   String _formatDate(DateTime date) {
@@ -75,11 +105,14 @@ class _StatusDropdown extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isLocked = task.status == TaskStatus.done;
+
     return PopupMenuButton<TaskStatus>(
+      enabled: !isLocked,
       offset: const Offset(0, 32),
       onSelected: (newStatus) {
         if (newStatus == task.status) return;
-        // ref.read(taskListProvider.notifier).updateStatus(task.id, newStatus);
+        ref.read(taskProvider.notifier).updateStatus(task.id, newStatus);
       },
       itemBuilder: (context) => TaskStatus.values.map((status) {
         return PopupMenuItem(

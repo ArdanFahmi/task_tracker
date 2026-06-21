@@ -62,9 +62,10 @@ class _TaskListScreenState extends ConsumerState<TaskListScreen> {
             ),
           );
         }
-        return ListView.builder(
+        return ListView.separated(
           itemCount: tasks.length,
           itemBuilder: (context, index) => TaskCard(task: tasks[index]),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
         );
       },
     );
